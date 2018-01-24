@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jaclyn Setina.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -49,10 +49,32 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
+    print("--------")
+    top_left_point = rectangle.get_upper_left_corner()
+    saved_top_left_x = top_left_point.x
+    top_left_y = top_left_point.y
 
+    WIDTH = rectangle.get_width()
+    HEIGHT = rectangle.get_height()
+
+    for k in range(n): # for each row...
+        top_left_x = saved_top_left_x
+
+        for j in range(k+1): # for each rectangle in the row...
+            # draw the rectangle
+            loop_top_left_pt = rg.Point(top_left_x, top_left_y)
+            loop_bottom_right_pt = rg.Point(top_left_x + WIDTH, top_left_y + HEIGHT)
+            loop_rect = rg.Rectangle(loop_top_left_pt, loop_bottom_right_pt)
+            loop_rect.attach_to(window)
+            window.render(0.1)
+            # figure out next starting point for the next rectangle
+            top_left_x += WIDTH
+
+        saved_top_left_x = saved_top_left_x - WIDTH / 2
+        top_left_y = top_left_y - HEIGHT
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

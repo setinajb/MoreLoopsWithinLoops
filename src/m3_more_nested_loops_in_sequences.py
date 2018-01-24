@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of SEQUENCES OF SUB-SEQUENCES.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jaclyn Setina.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 
 def main():
@@ -75,12 +75,17 @@ def largest_number(seq_seq):
     # TODO: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
-
+    new_num = -100000000000
+    for k in range(len(seq_seq)):
+        for j in range(len(seq_seq[k])):
+            if seq_seq[j] > new_num:
+                new_num = seq_seq[k]
+    return new_num
 
 def run_test_largest_negative_number():
     """ Tests the    largest_negative_number    function. """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE: 4. Implement this TEST function.
     #   It TESTS the  largest_negative_number  function defined below.
     #
     #   Include enough tests to give you confidence that your solution
@@ -90,6 +95,23 @@ def run_test_largest_negative_number():
     print('-------------------------------------------------')
     print('Testing the   LARGEST_NEGATIVE_NUMBER   function:')
     print('-------------------------------------------------')
+
+    # Test 1:
+    expected = -1
+    answer = largest_number([(3, -1, 4),
+                             (13, 10, -11, 7, 10),
+                             [1, 2, 3, -4]])
+    print('Expected and actual are:', expected, answer)
+
+    # Test 2:
+    expected = 'None'
+    answer = largest_number([])
+    print('Expected and actual are:', expected, answer)
+
+    # Test 3:
+    expected = 'None'
+    answer = largest_number([(0, 4, 3), (8, 66, 2)])
+    print('Expected and actual are:', expected, answer)
 
 
 def largest_negative_number(seq_seq):
